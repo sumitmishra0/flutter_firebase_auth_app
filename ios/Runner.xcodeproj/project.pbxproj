@@ -101,7 +101,6 @@
 				CCBDFCCB9AF0055938196893 /* Pods-RunnerTests.release.xcconfig */,
 				D21436C1F64172C909A98297 /* Pods-RunnerTests.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -246,7 +245,7 @@
 			);
 			mainGroup = 97C146E51CF9000F007C117D;
 			packageReferences = (
-				8922A92F2AA0795E0067610D /* XCRemoteSwiftPackageReference "swift-algorithms.git" */,
+				8922A92F2AA0795E0067610D /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
@@ -730,7 +729,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8922A92F2AA0795E0067610D /* XCRemoteSwiftPackageReference "swift-algorithms.git" */ = {
+		8922A92F2AA0795E0067610D /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-algorithms.git";
 			requirement = {
@@ -743,7 +742,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		8922A9302AA0795F0067610D /* Algorithms */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8922A92F2AA0795E0067610D /* XCRemoteSwiftPackageReference "swift-algorithms.git" */;
+			package = 8922A92F2AA0795E0067610D /* XCRemoteSwiftPackageReference "swift-algorithms" */;
 			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */

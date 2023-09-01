@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/ui/auth/login_with_phone_number.dart';
 import 'package:flutter_application_1/ui/auth/post/post_screen.dart';
 import 'package:flutter_application_1/ui/auth/signup_screen.dart';
 import 'package:flutter_application_1/utils/utils.dart';
@@ -33,27 +34,29 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         isLoading = true;
       });
-     final value = await _auth.signInWithEmailAndPassword(
-        email: emailController.text.toString(),
-        password: passwordController.text.toString());
-       if(value.user != null && value.user!.email != null && value.user!.email != '' ){
-         Utils().toastMessage(value.user!.email.toString());
+      final value = await _auth.signInWithEmailAndPassword(
+          email: emailController.text.toString(),
+          password: passwordController.text.toString());
+      if (value.user != null &&
+          value.user!.email != null &&
+          value.user!.email != '') {
+        Utils().toastMessage(value.user!.email.toString());
         setState(() {
-        isLoading = false;
-      });
-       Navigator.push(context, MaterialPageRoute(builder: (context) => PostScreen()));
-      
-       }
+          isLoading = false;
+        });
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => PostScreen()));
+      }
     } on FirebaseAuthException catch (error) {
-       debugPrint("Error in FirebaseAuthException login : ${error} ");
-       Utils().toastMessage(error.toString());
-       setState(() {
+      debugPrint("Error in FirebaseAuthException login : ${error} ");
+      Utils().toastMessage(error.toString());
+      setState(() {
         isLoading = false;
       });
     } catch (error) {
       debugPrint("Error in login : ${error} ");
       Utils().toastMessage(error.toString());
-       setState(() {
+      setState(() {
         isLoading = false;
       });
     }
@@ -146,6 +149,32 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text('SignUp')),
                 ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginWithPhoneNumber(),
+                      ));
+                },
+                child: Container(
+                  height: 50,
+                  child: Center(
+                      child: Text(
+                    "Login with phone",
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  )),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    border: Border.all(color: Colors.black),
+                  ),
+                ),
               )
             ],
           ),

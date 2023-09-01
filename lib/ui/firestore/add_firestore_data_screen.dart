@@ -1,24 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/utils.dart';
 import 'package:flutter_application_1/widgets/round_button.dart';
-import 'package:firebase_database/firebase_database.dart';
 
-class AddPostScreen extends StatefulWidget {
-  const AddPostScreen({super.key});
+class AddFirestoreDataScreen extends StatefulWidget {
+  const AddFirestoreDataScreen({super.key});
 
   @override
-  State<AddPostScreen> createState() => _AddPostScreenState();
+  State<AddFirestoreDataScreen> createState() => _AddFirestoreDataScreenState();
 }
 
-class _AddPostScreenState extends State<AddPostScreen> {
+class _AddFirestoreDataScreenState extends State<AddFirestoreDataScreen> {
   final postController = TextEditingController();
   bool isLoading = false;
-  final databaseRef = FirebaseDatabase.instance.ref('Post');
+  final fireStore = FirebaseFirestore.instance.collection('users');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Post'),
+        title: Text('Add Firestore Data'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -42,26 +43,22 @@ class _AddPostScreenState extends State<AddPostScreen> {
               setState(() {
                 isLoading = true;
               });
-              // databaseRef.child(DateTime.now().millisecondsSinceEpoch.toString()).child('Comments').set({
-              //   'id' : 1,
-              //   'note' : postController.text.toString(),
-              // });
               String id = DateTime.now().millisecondsSinceEpoch.toString();
-              try {
-               await databaseRef.child(id).set({
+              fireStore.doc(id).set({
+                'title' : postController.text.toString(),
                 'id' : id,
-                'note' : postController.text.toString(),
-              });
-              Utils().toastMessage('Post Added');
-              setState(() {
-                isLoading = false;
-              });
-              } catch (e) {
-                Utils().toastMessage(e.toString());
+              }).then((value) {
+                Utils().toastMessage('Post Added');
                 setState(() {
                 isLoading = false;
               });
-              }
+              }).onError((error, stackTrace) {
+                Utils().toastMessage(error.toString());
+                setState(() {
+                isLoading = false;
+              });
+              });
+             
               
             }),
           ],
